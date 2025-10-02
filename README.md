@@ -19,40 +19,40 @@ It accounts for the **variation of Earth’s axial tilt (obliquity of the eclipt
 ## 📐 The Mathematics Behind It
 
 ### 1. Solar Declination
-The Sun’s declination \(\delta\) is the angle between the rays of the Sun and the plane of the Earth’s equator.
+The Sun’s declination (δ) is the angle between the rays of the Sun and the plane of the Earth’s equator.
 
-- On the **equinoxes** (spring and fall), \( \delta = 0^\circ \).
-- On the **solstices**, \( \delta = \pm \epsilon \), where \(\epsilon\) is the Earth’s **axial tilt** (obliquity of the ecliptic).
+- On the **equinoxes** (spring and fall), δ = 0°.
+- On the **solstices**, δ = ±ε, where ε is the Earth’s **axial tilt** (obliquity of the ecliptic).
 
 The axial tilt is not fixed; it varies over a 41,000-year cycle between about 22.1° and 24.5°. For a given year, we approximate it using Jean Meeus’ *Astronomical Algorithms*:
 
-\[
-\epsilon = 84381.406'' - 46.836769T - 0.0001831T^2 + 0.00200340T^3 - 0.000000576T^4 - 0.0000000434T^5
-\]
+```
+ε = 84381.406'' - 46.836769T - 0.0001831T² + 0.00200340T³ - 0.000000576T⁴ - 0.0000000434T⁵
+```
 
 where:
-- \(T = (year - 2000)/100\), centuries since J2000 epoch,
-- \(\epsilon\) is returned in arcseconds, then converted to degrees.
+- T = (year - 2000) / 100, centuries since J2000 epoch,
+- ε is returned in arcseconds, then converted to degrees.
 
 ---
 
 ### 2. Sunrise Azimuth Formula
-The azimuth of **sunrise** \(A_{rise}\) (measured clockwise from **true north**) is given by:
+The azimuth of **sunrise** (A_rise) (measured clockwise from **true north**) is given by:
 
-\[
-\cos(A_{rise}) = \frac{\sin(\delta) - \sin(\phi) \cdot \sin(h)}{\cos(\phi) \cdot \cos(h)}
-\]
+```
+cos(A_rise) = (sin(δ) - sin(φ) * sin(h)) / (cos(φ) * cos(h))
+```
 
 where:
-- \(\phi\) = latitude (radians)
-- \(\delta\) = solar declination (radians)
-- \(h = -0.833^\circ\) = apparent altitude of the Sun’s center at sunrise (accounts for refraction and solar radius)
+- φ = latitude (radians)
+- δ = solar declination (radians)
+- h = -0.833° = apparent altitude of the Sun’s center at sunrise (accounts for refraction and solar radius)
 
 Finally:
 
-\[
-A_{rise} = \arccos(\cos(A_{rise}))
-\]
+```
+A_rise = arccos(cos(A_rise))
+```
 
 The result is converted to degrees.
 
@@ -63,13 +63,14 @@ The result is converted to degrees.
 ---
 
 ### 3. Sunset Azimuth Formula
-The azimuth of **sunset** \(A_{set}\) is symmetric across the **meridian (South)** relative to sunrise.
+The azimuth of **sunset** (A_set) is symmetric across the **meridian (South)** relative to sunrise.
 
 That is:
 
-\[
-A_{set} = 180^\circ - (A_{rise} - 90^\circ) = 270^\circ - (90^\circ - A_{rise})
-\]
+```
+A_set = 180° - (A_rise - 90°)
+       = 270° - (90° - A_rise)
+```
 
 This ensures:
 - If sunrise is **north of east** (< 90°), sunset will be **north of west** (> 270°).
