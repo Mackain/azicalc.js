@@ -1,4 +1,4 @@
-# Sunrise & Sunset Azimuth Calculator
+# AziCalc.js - Sunrise & Sunset Azimuth Calculator
 
 This JavaScript module provides functions to calculate the **compass azimuth (degrees from true north)** of both **sunrise** and **sunset** on four key celestial events:
 
